@@ -1,0 +1,116 @@
+# memory-base configuration (copy to config.toml and edit; both are git-ignored).
+# Every key is optional — with no config.toml memory-base runs fully local
+# and the LLM distillation step is skipped.
+
+[llm]
+# Option A (default): OpenAI-compatible endpoint of a LOCAL model server
+# (Ollama, LM Studio, …). Distillation sends card text only to the endpoint
+# configured here.
+# base_url = "http://127.0.0.1:11434/v1"
+# model = "qwen3:8b"
+#
+# Option B (cheap remote, rubles): Timeweb Cloud AI Gateway. Ключ — в панели
+# Timeweb (1 ₽/мес за ключ), сюда или в env BREPSI_BRAIN_API_KEY. Список
+# моделей: панель «Модель и провайдер»; впиши самую дешёвую в model. ВНИМАНИЕ: на удалённый провайдер закрытые 
+# карточки не отправляются никогда (privacy-гейт) — они ждут локальную модель.
+# base_url = "https://api.timeweb.ai/v1"
+# model = ""
+# Optional; the BREPSI_BRAIN_API_KEY environment variable takes precedence.
+api_key = ""
+# Per-request timeout and how many records (conversation, repo working day,
+# note) one `sync` run turns into knowledge cards at most.
+timeout_seconds = 60
+batch_size = 20
+
+# Распознаётся настройками «Модель и провайдер» в приложении: json_mode = true
+# просит у провайдера response_format=json_object при написании карточек.
+
+# Модель под каждый тип создаваемых данных. Пусто — модель активного маршрута.
+# Имена должны существовать у выбранного провайдера (локальные теги — brepsi/<id>).
+[llm.tasks]
+# distill = "brepsi/qwen2.5-7b"
+# answer = "openai/gpt-6-luna"
+# handoff = ""
+# projects = "brepsi/qwen2.5-7b"
+
+# Локальный маршрут. Заполняет установщик моделей; свой loopback-сервер тоже можно
+# указать здесь. Приватные записи и режим «только локально» идут этим маршрутом.
+[llm.local]
+# base_url = "http://127.0.0.1:11434/v1"
+# model = "brepsi/qwen2.5-7b"
+
+[privacy]
+# Cards whose source_ref matches any of these patterns (case-insensitive
+# regex) are NEVER sent to a non-local provider — only loopback endpoints
+# (localhost, 127.0.0.1, ::1, 0.0.0.0) may receive them. The built-in default
+# is empty: list your private projects here (a name matches refs, titles,
+# bodies and working directories).
+# local_only_patterns = ["acme"]
+
+# --- Local AI runtime (managed Ollama) ---------------------------------------
+[local_ai]
+# Where the portable engine, the Ollama store and downloaded GGUF files live.
+# Empty: <data root>/models. BREPSI_BRAIN_MODELS_ROOT overrides this value.
+# models_root = "D:/Models/BrepsiBrain"
+# on_demand: the engine starts for a job and stops after the idle timeout.
+# always: keep it running (faster first answer, constant VRAM use).
+mode = "on_demand"
+idle_timeout_seconds = 120
+# Context window for every locally installed model; 8192 for a minimal tier.
+context_tokens = 16384
+# Local requests are slower than cloud ones.
+timeout_seconds = 300
+# Records per sync run when the local model writes the cards.
+batch_size = 6
+# Never send anything to a remote provider, even if one is configured.
+offline_only = false
+# How often a scheduled sync wakes the local model (cards, project names), in
+# minutes. Absent: every scheduled sync. The sync button ignores this value.
+# collect_interval_minutes = 60
+
+# --- Sync schedule -----------------------------------------------------------
+[sync]
+# manual (default): only the sync button and the tray item.
+# interval: a Windows scheduled task runs `BrepsiBrain.exe sync` every N minutes;
+# set it from the app or switch this value explicitly.
+mode = "manual"
+# interval_minutes = 15
+
+[obsidian]
+# Obsidian vaults to index (list of absolute paths). Empty/absent: the
+# connector falls back to the `Obsidian` folder next to the app data.
+vaults = []
+# Directories skipped while walking a vault (hidden dirs are always skipped).
+exclude_dirs = [".obsidian", ".trash", "node_modules"]
+
+# --- Optional extra sources (ingest_extra; skipped entirely when unconfigured)
+[sources]
+# Корень, в подкаталогах которого лежат git-репозитории; по умолчанию —
+# папка данных приложения.
+# git_root = "C:/Users/you/projects"
+
+[sources.chatgpt_export]
+# Путь к conversations.json из ChatGPT data export (или к папке с ним).
+# path = "C:/Users/you/Downloads/chatgpt-export/conversations.json"
+
+[sources.gmail]
+# IMAP imap.gmail.com:993. Пароль приложения — сюда или в env GMAIL_APP_PASSWORD.
+enabled = false
+# email = "you@gmail.com"
+# app_password = ""
+
+[sources.yandex]
+# IMAP imap.yandex.ru:993. Пароль приложения — здесь или в env YANDEX_APP_PASSWORD.
+enabled = false
+# email = "you@yandex.ru"
+# app_password = ""
+
+[sources.github]
+# Коммиты владельца токена в его репозиториях, включая приватные. Токен — здесь
+# или в env GITHUB_TOKEN. Коммиты, которые уже есть в локальном git, не дублируются.
+# token = ""
+
+[sources.notion]
+# Токен integration (env NOTION_TOKEN переопределяет). Пустой query — все страницы.
+# token = ""
+# query = ""

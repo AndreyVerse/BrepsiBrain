@@ -1,0 +1,100 @@
+[
+ {
+  "name": "search_memory",
+  "description": "Search the local memory base. Returns top cards ranked by BM25\n        relevance boosted with a freshness factor (half-life 120 days).",
+  "inputSchema": {
+   "properties": {
+    "query": {
+     "title": "Query",
+     "type": "string"
+    },
+    "limit": {
+     "default": 8,
+     "title": "Limit",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "query"
+   ],
+   "title": "search_memoryArguments",
+   "type": "object"
+  },
+  "outputSchema": {
+   "properties": {
+    "result": {
+     "title": "Result",
+     "type": "string"
+    }
+   },
+   "required": [
+    "result"
+   ],
+   "title": "search_memoryOutput",
+   "type": "object"
+  }
+ },
+ {
+  "name": "recent",
+  "description": "Return the newest memory cards from the last `days` days.",
+  "inputSchema": {
+   "properties": {
+    "days": {
+     "default": 7,
+     "title": "Days",
+     "type": "integer"
+    },
+    "limit": {
+     "default": 20,
+     "title": "Limit",
+     "type": "integer"
+    }
+   },
+   "title": "recentArguments",
+   "type": "object"
+  },
+  "outputSchema": {
+   "properties": {
+    "result": {
+     "title": "Result",
+     "type": "string"
+    }
+   },
+   "required": [
+    "result"
+   ],
+   "title": "recentOutput",
+   "type": "object"
+  }
+ },
+ {
+  "name": "get_card",
+  "description": "Return the full content of one memory card by id.",
+  "inputSchema": {
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "id"
+   ],
+   "title": "get_cardArguments",
+   "type": "object"
+  },
+  "outputSchema": {
+   "properties": {
+    "result": {
+     "title": "Result",
+     "type": "string"
+    }
+   },
+   "required": [
+    "result"
+   ],
+   "title": "get_cardOutput",
+   "type": "object"
+  }
+ }
+]
