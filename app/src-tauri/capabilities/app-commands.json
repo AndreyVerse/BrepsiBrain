@@ -1,0 +1,9 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "app-commands",
+  "description": "App commands (folder picker) for the local dashboard loaded over http://127.0.0.1:8765",
+  "windows": ["main"],
+  "local": true,
+  "remote": { "urls": ["http://127.0.0.1:8765/*"] },
+  "permissions": ["core:default"]
+}

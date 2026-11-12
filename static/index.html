@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ru" data-lang="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#15171b">
+  <link rel="icon" href="/brand.svg" type="image/svg+xml">
+  <title>Brepsi Brain</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="m5 17 7-12 7 12M5 17h14"/><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="17" r="2.5"/><circle cx="19" cy="17" r="2.5"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h5l3 4h6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-9 9H3l1.8-5A9 9 0 1 1 21 12Z"/><path d="M8 10h8M8 14h5"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 5h13M8 12h13M8 19h13M3 5h.01M3 12h.01M3 19h.01"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-sync" viewBox="0 0 24 24"><path d="M20 7a9 9 0 0 0-15-2L2 8m0-5v5h5M4 17a9 9 0 0 0 15 2l3-3m0 5v-5h-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M18 6l-2.5 2.5m-7 7L6 18"/></symbol>
+    <symbol id="i-win-min" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-win-max" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="1.5"/></symbol>
+    <symbol id="i-win-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-transfer" viewBox="0 0 24 24"><path d="M4 8h13m-4-4 4 4-4 4M20 16H7m4-4-4 4 4 4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0-1.2-2.9H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h.1a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+  </svg>
+  <a class="skip-link" href="#content">К содержимому</a>
+  <div id="win-controls" class="win-controls" role="group" aria-label="Окно" hidden>
+    <button class="win-btn" data-win="minimize" type="button" aria-label="Свернуть" title="Свернуть"><svg class="icon"><use href="#i-win-min"/></svg></button>
+    <button class="win-btn" data-win="toggleMaximize" type="button" aria-label="Развернуть" title="Развернуть"><svg class="icon"><use href="#i-win-max"/></svg></button>
+    <button class="win-btn win-close" data-win="close" type="button" aria-label="Закрыть" title="Закрыть"><svg class="icon"><use href="#i-win-close"/></svg></button>
+  </div>
+
+  <aside id="sidebar" class="sidebar" aria-label="Навигация">
+    <div class="brand" data-tauri-drag-region="deep"><img class="brand-mark" src="/brand.svg" alt="" width="26" height="26"><a class="logo" href="#overview">Brepsi Brain</a><button id="palette-open" class="icon-button" type="button" aria-label="Быстрый поиск" title="Быстрый поиск (Ctrl K)"><svg class="icon"><use href="#i-search"/></svg></button></div>
+    <nav class="nav" aria-label="Разделы приложения">
+      <a class="nav-item nav-new" data-page="answers" href="#answers"><svg class="icon"><use href="#i-plus"/></svg>Спросить память<kbd class="nav-kbd">1</kbd></a>
+      <a class="nav-item" data-page="overview" href="#overview"><svg class="icon"><use href="#i-grid"/></svg>Обзор<kbd class="nav-kbd">2</kbd></a>
+      <a class="nav-item" data-page="records" href="#records"><svg class="icon"><use href="#i-list"/></svg>Все записи<kbd class="nav-kbd">3</kbd></a>
+      <a class="nav-item" data-page="graph" href="#graph"><svg class="icon"><use href="#i-map"/></svg>Карта памяти<span id="nav-graph" class="nav-tag" hidden></span><kbd class="nav-kbd">4</kbd></a>
+      <a class="nav-item" data-page="projects" href="#projects"><svg class="icon"><use href="#i-folder"/></svg>Проекты<kbd class="nav-kbd">5</kbd></a>
+      <a class="nav-item" data-page="handoff" href="#handoff"><svg class="icon"><use href="#i-transfer"/></svg>Перенос чатов<kbd class="nav-kbd">6</kbd></a>
+      <a class="nav-item" data-page="activity" href="#activity"><svg class="icon"><use href="#i-clock"/></svg>Журнал обработки<kbd class="nav-kbd">7</kbd></a>
+      <a class="nav-item" data-page="models" href="#models"><svg class="icon"><use href="#i-spark"/></svg>Модели<kbd class="nav-kbd">8</kbd></a>
+    </nav>
+    <div id="side-recent" class="side-section" hidden>
+      <button id="side-history-toggle" class="side-label side-toggle" type="button" aria-expanded="true" aria-controls="side-history">История поиска<span id="side-history-count" class="side-count"></span><svg class="icon side-chevron"><use href="#i-chevron"/></svg></button>
+      <div id="side-history" class="side-history" role="group" aria-label="История поиска"></div>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="local-status"><i id="sync-dot" class="status-dot"></i><span>База на этом компьютере</span></div>
+      <span id="sync-status" class="sync-status">Проверяем состояние…</span>
+      <span id="sync-built" class="sync-status sync-next"></span>
+      <div class="side-actions">
+        <button id="sync-now" class="sync-button" type="button"><svg class="icon"><use href="#i-sync"/></svg><span>Синхронизировать</span></button>
+        <button id="settings-open" class="sync-button sync-gear" type="button" aria-label="Настройки" title="Настройки"><svg class="icon"><use href="#i-gear"/></svg></button>
+      </div>
+      <a class="version" href="#about" title="О программе">BREPSI BRAIN <span>1.3.1 · APACHE-2.0</span></a>
+    </div>
+  </aside>
+  <div id="nav-scrim" class="nav-scrim" hidden></div>
+
+  <div class="workspace">
+    <header class="workspace-bar" data-tauri-drag-region="deep"><button id="nav-toggle" class="icon-button nav-toggle" type="button" aria-label="Меню" aria-expanded="false"><svg class="icon"><use href="#i-list"/></svg></button><span class="breadcrumb">Личная база знаний <span>/</span> <b id="breadcrumb-current">Обзор</b></span><div id="stats" class="stats" aria-live="polite"></div></header>
+    <main id="content" class="content" tabindex="-1">
+      <section id="page-overview" class="page" aria-labelledby="overview-title" hidden>
+        <div class="page-heading">
+          <div><span class="eyebrow">Ваша память, связанная воедино</span><h1 id="overview-title">Всё важное — рядом<span class="title-dot">.</span></h1><p>От отдельных разговоров к знаниям, которые остаются с вами.</p></div>
+          <a class="secondary-button" href="#graph">Открыть карту <svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div id="tiles" class="tiles"></div>
+        <div class="surface chart-card">
+          <div class="surface-head">
+            <div><h2 class="section-title">Как растёт ваша память</h2><p id="timeline-sub" class="subtle"></p></div>
+            <div id="timeline-period" class="segmented as-chips" role="group" aria-label="Период">
+              <button class="seg" data-weeks="12" type="button" aria-pressed="false">3 месяца</button>
+              <button class="seg" data-weeks="52" type="button" aria-pressed="false">Год</button>
+              <button class="seg" data-weeks="0" type="button" aria-pressed="true">Всё время</button>
+            </div>
+          </div>
+          <div id="timeline" class="timeline" role="img" aria-label="Записи по неделям и источникам"></div>
+          <div id="timeline-legend" class="legend"></div>
+          <button id="timeline-table-toggle" class="text-button" type="button" aria-expanded="false">Показать таблицей</button>
+          <div id="timeline-table" class="table-wrap" hidden></div>
+        </div>
+        <div class="split">
+          <div class="split-col">
+            <div class="surface"><div class="surface-head"><h2 class="section-title">Откуда приходят знания</h2><span class="subtle">Записи в базе</span></div><div id="source-breakdown"></div></div>
+            <div class="surface"><div class="surface-head"><h2 class="section-title">Где больше всего работы</h2><a class="text-button" href="#projects">Все проекты ↗</a></div><div id="top-projects"></div></div>
+          </div>
+          <div class="surface"><div class="surface-head"><h2 class="section-title">Недавно в памяти</h2><a class="text-button" href="#records">Все записи ↗</a></div><div id="fresh"></div></div>
+        </div>
+      </section>
+
+      <section id="page-graph" class="page page-wide" aria-labelledby="graph-title" hidden>
+        <header class="page-head">
+          <span class="graph-eyebrow">02 / Граф</span>
+          <h1 id="graph-title">Связи между записями</h1>
+          <p id="graph-lede" class="lede"></p>
+        </header>
+        <div id="graph-sources" class="chips" role="group" aria-label="Источник на графе"></div>
+        <div class="toolbar">
+          <div id="graph-period" class="segmented" role="group" aria-label="Период графа">
+            <button class="seg" data-days="0" type="button" aria-pressed="true">Всё время</button>
+            <button class="seg" data-days="90" type="button" aria-pressed="false">90 дней</button>
+            <button class="seg" data-days="30" type="button" aria-pressed="false">30 дней</button>
+          </div>
+          <input id="graph-find" class="input graph-find" type="search" placeholder="Найти на графе" aria-label="Найти на графе" autocomplete="off" spellcheck="false">
+          <span id="graph-find-note" class="subtle" role="status"></span>
+        </div>
+        <div id="graph-stage" class="graph-stage">
+          <canvas id="graph-canvas" class="graph-canvas" tabindex="0" role="img" aria-label="Граф записей. Записи доступны с клавиатуры в разделе Все записи."></canvas>
+          <div id="graph-labels" class="graph-labels" aria-hidden="true"></div>
+          <div id="graph-tip" class="graph-tip" hidden></div>
+          <div class="graph-tools" role="group" aria-label="Управление графом">
+            <button id="graph-zoom-in" type="button" aria-label="Приблизить">+</button>
+            <button id="graph-zoom-out" type="button" aria-label="Отдалить">−</button>
+            <button id="graph-fit" type="button">Вписать</button>
+            <button id="graph-view" type="button" aria-expanded="false" aria-controls="graph-view-menu">Вид</button>
+            <button id="graph-full" type="button" aria-label="Во весь экран" title="Во весь экран (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+          </div>
+          <div id="graph-view-menu" class="graph-view-menu" hidden>
+            <label><input type="checkbox" data-layer="labels" checked> Подписи проектов</label>
+            <label><input type="checkbox" data-layer="rings" checked> Кольца проектов</label>
+            <label><input type="checkbox" data-layer="edges" checked> Связи</label>
+          </div>
+          <aside id="graph-card" class="graph-card" aria-label="Выбранная запись" hidden></aside>
+          <div id="graph-state" class="graph-state" role="status"></div>
+          <p class="graph-help"><i class="legend-ring"></i>проект <i class="legend-dot"></i>запись <i class="legend-line"></i>общие темы<span>Клик выбирает, второй клик открывает · колесо — масштаб · Esc снимает выбор · F — весь экран</span></p>
+        </div>
+      </section>
+
+      <section id="page-projects" class="page" aria-labelledby="projects-title" hidden>
+        <div class="page-heading"><div><span class="eyebrow">Brepsi Brain / Проекты</span><h1 id="projects-title">У каждой идеи есть контекст</h1><p>Знания, собранные вокруг ваших проектов и коллекций.</p></div></div>
+        <div class="surface projects-page">
+          <div class="surface-head"><h2 class="section-title">Контекст по проектам</h2>
+            <div id="projects-sort" class="segmented as-chips" role="group" aria-label="Порядок проектов">
+              <button class="seg" data-sort="records" type="button" aria-pressed="true">По записям</button>
+              <button class="seg" data-sort="last_ts" type="button" aria-pressed="false">По свежести</button>
+            </div>
+          </div>
+          <p id="projects-lede" class="section-description"></p>
+          <div class="projects-tools">
+            <input id="projects-filter" class="input projects-filter" type="search" placeholder="Найти проект" aria-label="Найти проект" autocomplete="off" spellcheck="false">
+            <button id="projects-propose" class="secondary-button" type="button">Актуализировать названия</button>
+          </div>
+          <div id="projects-proposals" class="projects-proposals" hidden></div>
+          <div id="projects-grid" class="project-grid"></div>
+        </div>
+      </section>
+
+      <section id="page-records" class="page" aria-labelledby="records-title" hidden>
+        <div class="page-heading"><div><span class="eyebrow">Brepsi Brain / Все записи</span><h1 id="records-title">Найти то самое</h1><p>Разговоры, заметки и решения — с исходным контекстом.</p></div></div>
+        <div class="controls">
+          <div class="search-wrap"><svg class="search-icon" aria-hidden="true"><use href="#i-search"/></svg><input id="records-q" class="search" type="search" placeholder="Найти решение, идею или разговор…" aria-label="Поиск по записям" autocomplete="off" spellcheck="false"></div>
+          <div id="records-sources" class="chips" role="group" aria-label="Источник записей"></div>
+          <button id="records-clear" class="text-button" type="button" hidden>Сбросить фильтры</button>
+        </div>
+        <div class="surface results">
+          <div id="records-lede" class="list-head"></div>
+          <div id="records-list" class="record-list"></div>
+        </div>
+      </section>
+
+      <section id="page-answers" class="page page-ask" aria-labelledby="answers-title" hidden>
+        <div class="ask-hero"><img src="/brand.svg" alt="" width="40" height="40"><h1 id="answers-title">Что хотите вспомнить?</h1></div>
+        <form id="answer-form" class="composer">
+          <input id="answer-q" class="composer-input" type="search" placeholder="Спросите о прошлой работе: решения, ошибки, команды…" aria-label="Вопрос" autocomplete="off" spellcheck="false">
+          <div class="composer-row">
+            <span class="composer-modes"><span class="composer-mode"><svg class="icon"><use href="#i-search"/></svg>Память</span></span>
+            <span class="composer-hint">Ответ опирается на записи и ссылается на них</span>
+            <button class="composer-send" type="submit" aria-label="Спросить"><svg class="icon"><use href="#i-up"/></svg></button>
+          </div>
+        </form>
+        <div id="answer-out" class="answer-out" aria-live="polite"></div>
+        <div class="ask-recent"><span class="micro">Недавние вопросы</span><div id="answer-history" class="chips answer-history" role="group" aria-label="Недавние вопросы"></div></div>
+      </section>
+
+      <section id="page-handoff" class="page" aria-labelledby="handoff-title" hidden>
+        <div class="page-heading"><div><span class="eyebrow">Brepsi Brain / Перенос чатов</span><h1 id="handoff-title">Продолжить в другом харнессе</h1><p>Короткий чат переносится целиком, длинный — выжимкой: контекст и задачи, которые осталось сделать.</p></div></div>
+        <div class="surface">
+          <div id="handoff-kind" class="segmented handoff-kind" role="group" aria-label="Сценарий переноса">
+            <button class="seg" data-kind="harness" type="button" aria-pressed="true" title="Харнесс — программа-агент: Claude Code, Codex, Kimi Code и другие">В другой харнесс</button>
+            <button class="seg" data-kind="account" type="button" aria-pressed="false" title="Скопировать чат, сменить аккаунт и продолжить в том же харнессе">Смена аккаунта</button>
+          </div>
+          <div class="handoff-route">
+            <div id="handoff-from-side" class="handoff-side"><span class="micro">Откуда</span><div id="handoff-from" class="chips" role="group" aria-label="Харнесс-источник"></div></div>
+            <svg id="handoff-arrow" class="icon handoff-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <div id="handoff-to-side" class="handoff-side"><span class="micro">Куда</span><div id="handoff-to" class="chips" role="group" aria-label="Целевой харнесс"></div></div>
+          </div>
+        </div>
+        <div id="handoff-account" class="surface handoff-account" aria-live="polite" hidden></div>
+        <div class="surface results">
+          <div class="list-head handoff-head">
+            <span id="handoff-lede">Активные чаты</span>
+            <div id="handoff-hours" class="segmented" role="group" aria-label="Период">
+              <button class="seg" data-hours="6" type="button" aria-pressed="false">6 часов</button>
+              <button class="seg" data-hours="24" type="button" aria-pressed="false">Сутки</button>
+              <button class="seg" data-hours="72" type="button" aria-pressed="true">3 дня</button>
+              <button class="seg" data-hours="2160" type="button" aria-pressed="false">90 дней</button>
+            </div>
+          </div>
+          <div id="handoff-chats" class="record-list handoff-chats"></div>
+        </div>
+        <div class="handoff-actions">
+          <div id="handoff-mode" class="segmented" role="group" aria-label="Формат переноса">
+            <button class="seg" data-mode="auto" type="button" aria-pressed="true" title="Целиком до 30 тыс. символов, длиннее — выжимка">Авто</button>
+            <button class="seg" data-mode="full" type="button" aria-pressed="false">Целиком</button>
+            <button class="seg" data-mode="brief" type="button" aria-pressed="false" title="Краткая выжимка: цель, что сделано и список оставшегося">Выжимка</button>
+          </div>
+          <span id="handoff-hint" class="subtle"></span>
+          <button id="handoff-run" class="btn-cta" type="button" disabled>Перенести</button>
+        </div>
+        <div id="handoff-results" class="handoff-results" aria-live="polite"></div>
+      </section>
+
+      <section id="page-models" class="page" aria-labelledby="models-title" hidden>
+        <div class="page-heading"><div><span class="eyebrow">Brepsi Brain / Модели</span><h1 id="models-title">Модели и железо</h1><p>Локальная модель работает без интернета и без оплаты за токены.</p></div></div>
+        <div id="models-banner" class="models-banner" hidden>
+          <p id="models-banner-text">Платная модель не настроена. Установите локальную — она работает без интернета</p>
+          <button id="models-banner-open" class="btn-cta" type="button">Установить локальную модель</button>
+        </div>
+        <div id="models-error" class="form-error" role="alert" hidden></div>
+        <div class="surface models-offline">
+          <label class="check"><input id="models-offline" type="checkbox"> Использовать только локальные модели</label>
+          <p id="models-offline-note" class="subtle"></p>
+        </div>
+        <div id="models-install" class="surface models-install" aria-live="polite" hidden></div>
+        <div class="models-grid">
+          <div class="surface">
+            <div class="surface-head"><h2 class="section-title">Железо</h2></div>
+            <div id="models-hardware"></div>
+          </div>
+          <div class="surface">
+            <div class="surface-head"><h2 class="section-title">Движок</h2></div>
+            <div id="models-runtime"></div>
+          </div>
+        </div>
+        <div class="surface models-recommended">
+          <div class="surface-head"><h2 class="section-title">Под эту систему</h2></div>
+          <p class="section-description" id="models-recommended-note"></p>
+          <div class="models-actions"><button id="models-recommended-apply" class="btn-cta" type="button">Установить рекомендованное</button></div>
+        </div>
+        <div class="surface">
+          <div class="surface-head"><h2 class="section-title">Каталог моделей</h2>
+            <div class="models-filters">
+              <label class="check"><input id="models-only-fits" type="checkbox" checked> Только подходящие</label>
+              <label class="check"><input id="models-only-installed" type="checkbox"> Установленные</label>
+            </div>
+          </div>
+          <p class="section-description">Модели носят данные локально: записи и карточки не покидают компьютер.</p>
+          <div id="models-catalog" class="model-catalog"></div>
+        </div>
+        <div class="surface">
+          <div class="surface-head"><h2 class="section-title">Модели по задачам</h2></div>
+          <p class="section-description">Пустое поле — модель маршрута. Для отдельных задач можно выбрать установленную локальную модель.</p>
+          <div id="models-tasks" class="table-wrap"></div>
+          <div class="models-actions"><button id="models-tasks-save" class="btn-cta" type="button">Сохранить модели задач</button></div>
+        </div>
+      </section>
+
+      <section id="page-about" class="page" aria-labelledby="about-title" hidden>
+          <div class="page-heading"><div><span class="eyebrow">Brepsi Brain / О программе</span><h1 id="about-title">Память всех ваших AI-харнессов</h1><p>Сессии Claude Code, Codex, Kimi Code, Qoder и история git в одной локальной базе: поиск, карточки знаний, перенос чатов в Claude Code, Codex, Kimi Code, Qoder, Antigravity, OpenCode, DeepSeek Harness, ChatGPT, GigaCode и GitHub Copilot — и в свой харнесс, добавленный вручную. MCP для агентов.</p></div></div>
+        <div class="surface">
+          <div class="surface-head"><h2 class="section-title">Язык интерфейса</h2></div>
+          <div id="about-lang" class="segmented as-chips" role="group" aria-label="Язык интерфейса">
+            <button class="seg" data-lang="auto" type="button" aria-pressed="false">Как в системе</button>
+            <button class="seg" data-lang="ru" type="button" aria-pressed="false" lang="ru">Русский</button>
+            <button class="seg" data-lang="en" type="button" aria-pressed="false" lang="en">English</button>
+          </div>
+          <p class="section-description about-lang-note">Тот же выбор есть в трее: Настройки → Язык.</p>
+        </div>
+        <div class="surface">
+          <div class="surface-head"><h2 class="section-title">Обновление</h2></div>
+          <p id="about-update-note" class="section-description">Обновления проверяются в приложении.</p>
+          <label class="check"><input id="about-auto-update" type="checkbox" checked> Устанавливать обновления автоматически при запуске и после синхронизации</label>
+          <button id="about-update" class="btn" type="button" hidden></button>
+        </div>
+        <div class="surface about-facts">
+          <div class="surface-head"><h2 class="section-title">Лицензия</h2></div>
+          <p><span class="subtle">Репозиторий</span> <button class="text-button" data-url="https://github.com/AndreyVerse/BrepsiBrain" type="button">github.com/AndreyVerse/BrepsiBrain</button></p>
+          <p class="section-description">Лицензия Apache-2.0. Производные работы обязаны сохранять файл NOTICE с именем автора и ссылками (§4(d) лицензии).</p>
+        </div>
+      </section>
+
+      <section id="page-activity" class="page" aria-labelledby="activity-title" hidden>
+        <div class="page-heading"><div><span class="eyebrow">Brepsi Brain / Журнал обработки</span><h1 id="activity-title">Из истории — в знания</h1><p id="activity-lede"></p></div></div>
+        <div class="surface">
+          <div class="surface-head"><h2 class="section-title">Очередь пересказа</h2></div>
+          <p class="section-description">Одна карточка на запись. Запись ждёт 30 минут тишины, день коммитов — конца суток.</p>
+          <div id="queue-bar" class="queue-bar"></div>
+          <div id="queue-legend" class="queue-legend"></div>
+          <div id="queue-failed" class="queue-failed"></div>
+        </div>
+        <div class="surface">
+          <div class="surface-head"><h2 class="section-title">Журналы</h2>
+            <div class="log-tools">
+              <select id="log-name" class="input log-name" aria-label="Журнал">
+                <option value="sync.log">sync.log</option>
+                <option value="ollama-serve.log">ollama-serve.log</option>
+              </select>
+              <label class="check"><input id="log-auto" type="checkbox"> Автообновление</label>
+              <button id="log-refresh" class="text-button" type="button">Обновить ↻</button>
+            </div>
+          </div>
+          <p id="log-note" class="subtle"></p>
+          <pre id="log-text" class="log-text"></pre>
+        </div>
+        <div class="surface">
+          <div class="surface-head"><h2 class="section-title">Обработка знаний</h2><button id="usage-refresh" class="text-button" type="button">Обновить ↻</button></div>
+          <p class="section-description">История записанных обращений к модели. Суммы отображаются только при наличии данных о стоимости.</p>
+          <div id="usage-summary" class="usage-summary"></div>
+          <div id="usage-runs" class="table-wrap"></div>
+        </div>
+        <div class="surface">
+          <div class="surface-head"><h2 class="section-title">Модели и время</h2></div>
+          <p class="section-description">Часы работы локального движка, расход по задачам и последние замеры.</p>
+          <div id="model-stats" class="model-stats"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="workspace-footer"><span>Ваша история становится вашим преимуществом.</span><span><kbd>Ctrl K</kbd> быстрый поиск</span></footer>
+  </div>
+
+  <div id="scrim" class="scrim" hidden></div>
+  <aside id="panel" class="panel" aria-label="Запись" tabindex="-1" hidden></aside>
+
+  <div id="palette" class="palette" hidden>
+    <div class="palette-box" role="dialog" aria-modal="true" aria-label="Командная палитра">
+      <input id="palette-input" class="palette-input" type="text" placeholder="Найти в памяти или выбрать действие…" autocomplete="off" aria-label="Поиск по памяти или команда">
+      <div id="palette-list" class="palette-list" role="listbox"></div>
+      <div class="palette-hint">↑↓ выбрать · Enter открыть · Esc закрыть</div>
+    </div>
+  </div>
+
+  <dialog id="settings" class="settings" aria-labelledby="settings-title">
+    <form id="settings-form" method="dialog">
+      <h2 id="settings-title">Настройки</h2>
+      <p id="settings-now" class="subtle"></p>
+      <div class="settings-section">
+        <h3 class="section-title">Провайдер</h3>
+        <label class="field"><span>Провайдер</span><select id="set-provider" class="input"></select></label>
+        <label class="field"><span>Адрес API</span><input id="set-url" class="input" type="url" autocomplete="off" spellcheck="false"></label>
+        <label class="field"><span>API-ключ</span><input id="set-key" class="input" type="password" autocomplete="new-password" spellcheck="false"></label>
+        <p id="set-key-note" class="subtle"></p>
+        <div class="field">
+          <label for="set-model">Модель</label>
+          <div class="field-row">
+            <input id="set-model" class="input" list="set-models" autocomplete="off" spellcheck="false">
+            <datalist id="set-models"></datalist>
+            <button id="set-refresh" class="sync-button" type="button">Обновить</button>
+          </div>
+        </div>
+        <p id="set-models-note" class="subtle" role="status"></p>
+        <label class="field"><span>Запасная модель</span><input id="set-fallback" class="input" list="set-models" autocomplete="off" spellcheck="false" title="Используется, если основная модель не ответила. Пусто — без запасной."></label>
+        <label class="check"><input id="set-json" type="checkbox"> Запрашивать ответ в формате JSON</label>
+        <p class="subtle settings-note">Применится со следующего запуска. Готовые карточки сохранятся.</p>
+      </div>
+      <div class="settings-section">
+        <h3 class="section-title">Расписание</h3>
+        <div class="sync-mode" role="radiogroup" aria-label="Расписание синхронизации">
+          <label class="check"><input id="sync-mode-interval" type="radio" name="sync-mode" value="interval" checked> По интервалу</label>
+          <label class="check"><input id="sync-mode-manual" type="radio" name="sync-mode" value="manual"> Только вручную</label>
+        </div>
+        <label class="field"><span>Интервал, минут</span><input id="set-sync-interval" class="input" type="number" min="5" max="1440" value="15"></label>
+        <p id="set-sync-next" class="subtle"></p>
+        <p id="set-sync-state" class="subtle"></p>
+      </div>
+      <div class="settings-section">
+        <h3 class="section-title">Локальная модель</h3>
+        <label class="field"><span>Модель</span><select id="set-local-model" class="input"></select></label>
+        <p id="set-local-note" class="subtle"></p>
+        <label class="field"><span>Интервал сбора данных, минут</span><input id="set-local-interval" class="input" type="number" min="5" max="1440" value="15"></label>
+        <p id="set-local-interval-note" class="subtle"></p>
+      </div>
+      <p id="set-error" class="form-error" role="alert" hidden></p>
+      <div class="settings-actions">
+        <button id="set-cancel" class="sync-button" type="button">Отмена</button>
+        <button class="btn-cta" type="submit">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="harness-add" class="settings" aria-labelledby="harness-add-title">
+    <form id="harness-add-form" method="dialog">
+      <h2 id="harness-add-title">Свой харнесс</h2>
+      <p class="subtle">Цель появится в списке «Куда». Промпт переноса копируется в буфер, указанная программа открывается сама.</p>
+      <label class="field"><span>Название</span><input id="harness-name" class="input" maxlength="40" required autocomplete="off"></label>
+      <label class="field"><span>Программа (необязательно)</span><input id="harness-command" class="input" placeholder="C:\Tools\MyHarness\myharness.exe" autocomplete="off" spellcheck="false"></label>
+      <p id="harness-add-error" class="form-error" role="alert" hidden></p>
+      <div id="harness-custom-list" class="harness-custom-list"></div>
+      <div class="settings-actions">
+        <button id="harness-add-cancel" class="sync-button" type="button">Отмена</button>
+        <button class="btn-cta" type="submit">Добавить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="models-wizard" class="settings models-wizard" aria-labelledby="wizard-title">
+    <div class="wizard-head">
+      <span class="micro">Установка модели</span>
+      <h2 id="wizard-title">Мастер установки локальной модели</h2>
+      <p id="wizard-step-label" class="subtle"></p>
+    </div>
+    <div id="wizard-body" class="wizard-body"></div>
+    <p id="wizard-error" class="form-error" role="alert" hidden></p>
+    <div class="settings-actions">
+      <button id="wizard-close" class="sync-button" type="button">Закрыть</button>
+      <button id="wizard-back" class="sync-button" type="button">Назад</button>
+      <button id="wizard-next" class="btn-cta" type="button">Далее</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="/i18n.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
