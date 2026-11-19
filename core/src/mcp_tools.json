@@ -1,0 +1,80 @@
+[
+ {
+  "name": "search_memory",
+  "description": "Search the local memory base. Returns top cards ranked by BM25\n        relevance boosted with a freshness factor (half-life 120 days).",
+  "inputSchema": {
+   "properties": {
+    "query": {
+     "title": "Query",
+     "type": "string"
+    },
+    "limit": {
+     "default": 8,
+     "title": "Limit",
+     "type": "integer",
+     "maximum": 50
+    }
+   },
+   "required": [
+    "query"
+   ],
+   "title": "search_memoryArguments",
+   "type": "object"
+  }
+ },
+ {
+  "name": "recent",
+  "description": "Return the newest memory cards from the last `days` days.",
+  "inputSchema": {
+   "properties": {
+    "days": {
+     "default": 7,
+     "title": "Days",
+     "type": "integer"
+    },
+    "limit": {
+     "default": 20,
+     "title": "Limit",
+     "type": "integer",
+     "maximum": 100
+    }
+   },
+   "title": "recentArguments",
+   "type": "object"
+  }
+ },
+ {
+  "name": "get_card",
+  "description": "Return the full content of one memory card by id.",
+  "inputSchema": {
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "id"
+   ],
+   "title": "get_cardArguments",
+   "type": "object"
+  }
+ },
+ {
+  "name": "project_brief",
+  "description": "Compact brief of the project that owns `cwd` (resolved by its git root): decisions in force (without superseded ones), recent errors and pitfalls, pinned records and possibly stale cards, with card ids for get_card. Unknown folder returns a short note, not an error.",
+  "inputSchema": {
+   "properties": {
+    "cwd": {
+     "title": "Cwd",
+     "type": "string"
+    }
+   },
+   "required": [
+    "cwd"
+   ],
+   "title": "project_briefArguments",
+   "type": "object"
+  }
+ }
+]

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <defs>
+    <linearGradient id="tile" x1="40" y1="0" x2="200" y2="256" gradientUnits="userSpaceOnUse"><stop stop-color="#2c3340"/><stop offset="1" stop-color="#14171e"/></linearGradient>
+    <linearGradient id="lobe" x1="40" y1="30" x2="216" y2="226" gradientUnits="userSpaceOnUse"><stop stop-color="#a9c2ff"/><stop offset=".5" stop-color="#5f93ff"/><stop offset="1" stop-color="#3a7bf0"/></linearGradient>
+  </defs>
+  <rect x="4" y="4" width="248" height="248" rx="64" fill="url(#tile)"/>
+  <g transform="translate(128 128) scale(.94) translate(-128 -128)">
+    <path d="M120 34c-22-5-47 3-56 22-26 3-43 26-38 51-18 16-20 44-3 61-3 26 17 47 42 47 12 13 34 16 55 7Z" fill="url(#lobe)"/>
+    <path d="M120 34c-22-5-47 3-56 22-26 3-43 26-38 51-18 16-20 44-3 61-3 26 17 47 42 47 12 13 34 16 55 7Z" fill="url(#lobe)" transform="translate(256 0) scale(-1 1)"/>
+    <path d="M128 34v188" stroke="#1a1e27" stroke-width="12"/>
+    <path d="M74 84 128 128 182 84M128 128 74 172M128 128l54 44" stroke="#1a1e27" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="128" cy="128" r="32" fill="#1a1e27"/><circle cx="128" cy="128" r="21" fill="#f4f8ff"/>
+  </g>
+</svg>
